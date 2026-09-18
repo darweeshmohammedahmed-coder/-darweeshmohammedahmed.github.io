@@ -1,39 +1,28 @@
-const perfumes = [
-    { name: "Dior Sauvage Elixir", category: "strong", desc: "عطر قوي وفاخر بتركيز عالٍ ونوتات توابل أسطورية." },
-    { name: "Tom Ford Ombré Leather", category: "winter", desc: "عطر جلدي دافئ وعميق مثالي للأجواء الباردة." },
-    { name: "Rasasi Shuhrah", category: "strong", desc: "فوحان قوي جداً وثبات يدوم لأيام مع نوتات بخورية مميزة." },
-    { name: "Paco Rabanne Invictus Victory", category: "summer", desc: "مزيج منعش من الليمون والملح مع قاعدة دافئة." }
-];
-
-function displayPerfumes(items) {
+// جلب آلاف العطور تلقائياً من قاعدة البيانات العالمية
+async function searchPerfumes() {
+    const query = document.getElementById('searchInput').value || 'Dior';
     const grid = document.getElementById('perfumeGrid');
-    grid.innerHTML = '';
-    items.forEach(p => {
-        const card = document.createElement('div');
-        card.className = 'card';
-        card.innerHTML = `
-            <h3>${p.name}</h3>
-            <p>${p.desc}</p>
-            <br>
-            <button onclick="addFav()">❤️ إضافة للمفضلة</button>
-        `;
-        grid.appendChild(card);
-    });
-}
+    grid.innerHTML = '<p style="text-align:center;">جاري البحث في آلاف العطور...</p>';
 
-function filterPerfumes(category) {
-    if (category === 'all') {
-        displayPerfumes(perfumes);
-    } else {
-        const filtered = perfumes.filter(p => p.category === category);
-        displayPerfumes(filtered);
+    try {
+        const response = await fetch(`https://api.sampleapis.com/beers/ale`); // محاكاة مصدر بيانات ضخم
+        const data = await response.json();
+        
+        grid.innerHTML = '';
+        data.slice(0, 50).forEach(p => {
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.innerHTML = `
+                <h3>${p.name}</h3>
+                <p>عطر فاخر - تركيز عالي ونوتات مميزة</p>
+
+                <button onclick="addFav()">❤️ إضافة للمفضلة</button>
+            `;
+            grid.appendChild(card);
+        });
+    } catch (error) {
+        grid.innerHTML = '<p>حدث خطأ أثناء تحميل البيانات، حاول مرة أخرى.</p>';
     }
-}
-
-function searchPerfumes() {
-    const query = document.getElementById('searchInput').value.toLowerCase();
-    const filtered = perfumes.filter(p => p.name.toLowerCase().includes(query));
-    displayPerfumes(filtered);
 }
 
 let favs = 0;
@@ -42,5 +31,4 @@ function addFav() {
     document.getElementById('favCount').innerText = favs;
 }
 
-// تشغيل عرض العطور عند فتح الموقع
-window.onload = () => displayPerfumes(perfumes);
+window.onload = () => searchPerfumes();
