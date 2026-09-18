@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SCENTORA | عالم العطور الفاخرة</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="navbar">
+        <div class="logo">SCENTORA</div>
+        <input type="text" id="searchInput" placeholder="ابحث عن عطرك المفضل..." onkeyup="searchPerfumes()">
+        <div class="favorites-count">❤️ <span id="favCount">0</span></div>
+    </header>
+
+    <section class="hero">
+        <h1>اكتشف سحر العطور الفاخرة</h1>
+        <p>تسطيع الوصول لأرقى التقييمات والمقارنات بين أشهر العطور العالمية</p>
+    </section>
+
+    <main class="container">
+        <aside class="filters">
+            <h3>تصفية العطور</h3>
+            <button onclick="filterPerfumes('all')">الكل</button>
+            <button onclick="filterPerfumes('summer')">صيفي ☀️</button>
+            <button onclick="filterPerfumes('winter')">شتوي ❄️</button>
+            <button onclick="filterPerfumes('strong')">فوحان قوي 🔥</button>
+        </aside>
+
+        <section class="perfume-grid" id="perfumeGrid">
+            <!-- سيتم تحميل العطور عبر app.js -->
+        </section>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>
