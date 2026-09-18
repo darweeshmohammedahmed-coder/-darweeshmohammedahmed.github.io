@@ -1,4 +1,3 @@
-// قاعدة بيانات العطور مع صور مباشرة ودقيقة لكل عطر
 const perfumes = [
     { 
         name: "Dior Sauvage Elixir", 
